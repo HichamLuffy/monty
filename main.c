@@ -17,32 +17,29 @@ int main (int argc, char *argv[])
     ma_file = open_file(argv[1]);
     while (fgets(limit, LIMIT_STACK, ma_file) != NULL)
     {
-        if (strlen(limit) < 4 || limit[0] == ' ' || limit[0] == '#')
-        {
-            line_number++;
-            continue;
-        }
+        line_number++;
         trim(limit);
         if (strlen(limit) == 0 || limit[0] == '#')
             continue;
         token = strtok(limit, " \t\n");
-        if (!token)
-        {
-            fprintf(stderr, "L%d: Invalid command\n", line_number);
-            free_stack(stack);
-            fclose(ma_file);
-            exit(EXIT_FAILURE);
-        }
         if (strcmp(token, "push") == 0)
         {
             token = strtok(NULL, " \t\n");
-            if (!token || !is_numeric(token))
+            if (!token)
+            {
+                fprintf(stderr, "L%d: Invalid command\n", line_number);
+                free_stack(stack);
+                fclose(ma_file);
+                exit(EXIT_FAILURE);
+            }
+            if (!is_numeric(token))
             {
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 free_stack(stack);
                 fclose(ma_file);
                 exit(EXIT_FAILURE);
             }
+
             value = atoi(token);
             stack = ma_push(&stack, value);
         }
