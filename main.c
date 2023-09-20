@@ -14,6 +14,11 @@ int main (int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	ma_file = open_file(argv[1], "r");
+    if (!ma_file)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		line_number++;
@@ -40,13 +45,7 @@ int main (int argc, char *argv[])
 		{
 			ma_pall(&stack, line_number);
 		}
-		else
-		{
-			fprintf(stderr, "L%d: Unknown command: %s\n", line_number, token);
-			free_stack(stack);
-			fclose(ma_file);
-			exit(EXIT_FAILURE);
-		}
+		
 	}
 
 	free_stack(stack);
