@@ -1,6 +1,15 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+#define LIMIT_STACK 100
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -30,5 +39,16 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+
+/*opcodes*/
+void ma_pall(stack_t **stack, unsigned int line_number);
+stack_t *ma_push(stack_t **stack, unsigned int line_number);
+
+/*functions*/
+FILE *open_file(char *filename);
+void free_stack(stack_t *stack);
+bool is_numeric(const char *str);
+void trim(char *str);
 
 #endif /* MONTY_H */
