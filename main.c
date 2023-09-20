@@ -20,18 +20,13 @@ int main (int argc, char *argv[])
 		trim(limit);
 		if (strlen(limit) == 0 || limit[0] == '#')
 			continue;
+
 		token = strtok(limit, " \t\n");
+
 		if (strcmp(token, "push") == 0)
 		{
 			token = strtok(NULL, " \t\n");
-			if (!token || token[0] == '#')
-			{
-				fprintf(stderr, "L%d: Invalid command\n", line_number);
-				free_stack(stack);
-				fclose(ma_file);
-				exit(EXIT_FAILURE);
-			}
-			if (!is_numeric(token))
+			if (!token || !is_numeric(token))
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				free_stack(stack);
