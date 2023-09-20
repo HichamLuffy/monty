@@ -50,5 +50,5 @@ int main (int argc, char *argv[])
 
 	free_stack(stack);
 	fclose(ma_file);
-	return (EXIT_SUCCESS);
+	return (0);
 }
