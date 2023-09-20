@@ -13,6 +13,8 @@ stack_t *ma_push(stack_t **stack, unsigned int line_number)
 
 	if (!new)
 	{
+        if (*stack)
+            free_stack(*stack);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
@@ -23,7 +25,6 @@ stack_t *ma_push(stack_t **stack, unsigned int line_number)
 	{
 		(*stack)->prev = new;
 	}
-
 	*stack = new;
 
 	return (*stack);
@@ -39,10 +40,11 @@ void ma_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = *stack;
 
-	(void) line_number;
-
-	if (!*stack)
-		return;
+	if (!stack)
+    {
+        fprintf(stderr, "L%d: can't pall, stack empty\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 	else
 	{
 		while (tmp != NULL)
