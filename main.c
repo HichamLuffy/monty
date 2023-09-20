@@ -14,8 +14,8 @@ int main (int argc, char *argv[])
 		printf("Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	ma_file = open_file(argv[1]);
-	while (fgets(limit, LIMIT_STACK, ma_file) != NULL)
+	ma_file = open_file(argv[1], "r");
+	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		line_number++;
 		trim(limit);
