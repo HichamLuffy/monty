@@ -5,7 +5,6 @@ int main (int argc, char *argv[])
 {
 	char limit[LIMIT_STACK], *token;
 	FILE *ma_file;
-	int value;
 	stack_t *stack = NULL;
 	int line_number = 0;
 
@@ -39,9 +38,8 @@ int main (int argc, char *argv[])
 				fclose(ma_file);
 				exit(EXIT_FAILURE);
 			}
-
-			value = atoi(token);
-			stack = ma_push(&stack, value);
+            else
+                ma_push(&stack, atoi(token));
 		}
 		else if (strcmp(token, "pall") == 0)
 		{
