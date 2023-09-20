@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
 		if (strcmp(token, "push") == 0)
 		{
 			token = strtok(NULL, " \t\n");
-			if (!token)
+			if (!token || token[0] == '#')
 			{
 				fprintf(stderr, "L%d: Invalid command\n", line_number);
 				free_stack(stack);
