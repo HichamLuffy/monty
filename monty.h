@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-#define LIMIT_STACK 100
+#define LIMIT_STACK 1000
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -40,7 +40,20 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+/**
+ * struct buf_struct - Global buffers.
+ * @cmdlist: Tokenized read buffer.
+ * @cmdtoken: Tokenize each token from previous split based on spaces.
+ * @argv: Arguments from command line.
+ *
+ * Description: - Buffers used globally throughout files.
+ */
+typedef struct bfstruct
+{
+	char *cmdlist[100];
+	char *cmdtoken[100];
+	char **argv;
+} bfstruct;
 /*opcodes*/
 void ma_pall(stack_t **stack, unsigned int line_number);
 stack_t *ma_push(stack_t **stack, unsigned int line_number);
