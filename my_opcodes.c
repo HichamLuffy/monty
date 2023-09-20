@@ -46,9 +46,10 @@ void ma_pall(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 	
-	for (; tmp; tmp = tmp->next)
+	while (tmp != NULL)
 	{
-		fprintf(stdout, "%d\n", tmp->n);
+		printf("%d\n", (tmp)->n);
+		tmp = tmp->next;
 	}
 	
 }
