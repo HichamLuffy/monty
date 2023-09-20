@@ -1,6 +1,24 @@
 #include "monty.h"
 
 /**
+ * open_file - opens a file
+ * @filename: name of the file
+ * Return: pointer to the file
+ */
+FILE *open_file(char *filename, char *mode)
+{
+    FILE *ma_file;
+
+    ma_file = fopen(filename, mode);
+    if (ma_file == NULL)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+    return (ma_file);
+
+}
+/**
  * free_stack - frees a stack
  * @stack: pointer to the top of the stack
  * Return: void

@@ -1,5 +1,6 @@
 #include "monty.h"
 
+
 int main (int argc, char *argv[])
 {
 	char limit[LIMIT_STACK], *token;
@@ -13,12 +14,7 @@ int main (int argc, char *argv[])
 		printf("Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	ma_file = fopen(argv[1], "r");
-    if (ma_file == NULL)
-	{
-		printf("Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+	ma_file = open_file(argv[1], "r");
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		line_number++;
