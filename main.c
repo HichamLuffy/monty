@@ -44,7 +44,7 @@ int main (int argc, char *argv[])
                     token = strtok(NULL, " \t\n");
                     if (!token || !is_numeric(token))
                     {
-                        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                        fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
                         free_stack(buf.first);
                         exit(EXIT_FAILURE);
                     }
