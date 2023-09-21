@@ -39,7 +39,7 @@ void free_stack(stack_t *stack)
  * @str: string
  * Return: void
  */
-void trim(char *str)
+char *trim(char *str)
 {
     int start = 0, end = strlen(str) - 1;
     int shift = 0, i;
@@ -49,12 +49,23 @@ void trim(char *str)
 
     while ((end >= start) && isspace((unsigned char)str[end]))
         end--;
+
+    char *trimmed_str = (char *)malloc((end - start + 2) * sizeof(char));
+    if (trimmed_str == NULL)
+    {
+        fprintf(stderr, "Error: Memory allocation failed in trim function\n");
+        exit(EXIT_FAILURE);
+    }
+
     for (i = start; i <= end; i++)
     {
-        str[i - shift] = str[i];
+        trimmed_str[i - start] = str[i];
     }
-    str[end - start + 1] = '\0';
+    trimmed_str[end - start + 1] = '\0';
+
+    return trimmed_str;
 }
+
 /**
  * is_numeric - checks if a string is a number
  * @str: string
