@@ -21,14 +21,13 @@ int main (int argc, char *argv[])
     }
     while (fgets(limit, LIMIT_STACK, ma_file))
     {
-        line_number++;
         trim(limit);
         if (strlen(limit) < 3 || limit[0] == '#')
         {
-            fprintf(stderr, "L%d: ignoring empty line\n", line_number);
             line_number++;
             continue;
         }
+        line_number++;
         token = strtok(limit, " \t\n");
         if (!token)
             continue;
