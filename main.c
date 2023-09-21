@@ -4,82 +4,85 @@ bfstruct buf;
 
 int main (int argc, char *argv[])
 {
-	char limit[LIMIT_STACK];
-	FILE *ma_file;
-	stack_t *stack = NULL;
-	int i = 0, line_number = 0;
-    void (*op_func)(stack_t **stack, unsigned int line_number) = NULL;
+	char limit[LIMIT_STACK], *token;
+	int i = 0;
 
+    buf.md = 0;
+    buf.num_lines = 0;
 	if (argc != 2)
 	{
 		printf("Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	ma_file = open_file(argv[1], "r");
-    if (!ma_file)
+	buf.mafile = open_file(argv[1], "r");
+    if (!buf.mafile)
     {
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-	while (fgets(limit, LIMIT_STACK, ma_file))
+	while (fgets(limit, sizeof(limit), buf.mafile) != NULL)
 	{
-		buf.num_lines++;
-		trim(limit);
-		if (strlen(limit) == 0 || limit[0] == '#')
+        if (strlen(trim(limit)) < 3 || trim(limit)[0] == '#')
         {
             buf.num_lines++;
-			continue;
+            continue;
         }
-        buf.num_lines++;
-		buf.cmdtoken[0] = strtok(limit, " \t\n");
-		if (strcmp(buf.cmdtoken[0], "push") == 0)
-		{
-			buf.cmdtoken[1] = strtok(NULL, " \t\n");
-			if (!buf.cmdtoken[1] || !is_numeric(buf.cmdtoken[1]))
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				free_stack(stack);
-				fclose(ma_file);
-				exit(EXIT_FAILURE);
-			}
-            else
-                ma_push(&stack, atoi(buf.cmdtoken[1]));
-		}
-		else
-		{
-            op_func = get_op_func(buf.cmdtoken[0]);
-            if (!op_func)
+		buf.num_lines++;
+        token = strtok(limit, " \n");
+        buf.opcode = NULL;
+		for (i = 0; token != NULL && i < 2; i++)
+        {
+            if (i == 0)
+                buf.opcode = token;
+            if (strcmp(buf.opcode, "push") != 0)
+                break;
+            if (i == 1)
             {
-                free_stack(stack);
-                fprintf(stderr, "L%d: unknown instruction %s\n", line_number, buf.cmdtoken[0]);
-                exit(EXIT_FAILURE);
-            }
-            (*get_op_func(buf.cmdtoken[0]))(&stack, line_number);
-		}
-        line_number++;
-        i++;
-	}
 
-	free_stack(stack);
-	fclose(ma_file);
+                if (!is_numeric(token))
+                {
+                    fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
+                    free_stack(buf.first);
+                    exit(EXIT_FAILURE);
+                }
+                buf.cmdtoken[i] = token;
+            }
+            token = strtok(NULL, " \n");
+        }
+        if (buf.opcode == NULL)
+        {
+            fprintf(stderr, "L%d: unknown instruction\n", buf.num_lines);
+            free_stack(buf.first);
+            exit(EXIT_FAILURE);
+        }
+        do_it();
+
+    }
+	free_stack(buf.first);
 	return (0);
 }
-void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number)
+void do_it(void)
 {
-	instruction_t opf[] = {
+	instruction_t ins[] = {
+        {"push", ma_push},
 		{"pall", ma_pall},
 		{NULL, NULL},
 	};
+	int j = 0;
 
-	int i = 0;
-
-	while (opf[i].opcode)
+	for (j = 0; ins[j].opcode; j++)
 	{
-		if (strncmp(s, opf[i].opcode, (strlen(s))) == 0)
+		if (strcmp(buf.opcode, ins[j].opcode) == 0)
 		{
-			return (opf[i].f);
+			ins[j].f(&buf.first, buf.num_lines);
+			break;
 		}
-		i++;
 	}
-	return (NULL);
+	if (!ins[j].opcode)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n",
+				buf.num_lines, buf.opcode);
+		free_stack(buf.first);
+		exit(EXIT_FAILURE);
+	}
 }

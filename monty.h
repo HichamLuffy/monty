@@ -50,22 +50,26 @@ typedef struct instruction_s
  */
 typedef struct bfstruct
 {
+        int md;
+        FILE *mafile;
         unsigned int num_lines;
 	char *cmdlist[100];
 	char *cmdtoken[100];
+        char *opcode;
 	char **argv;
+        stack_t *first;
+
 } bfstruct;
 extern bfstruct buf;
 /*opcodes*/
 void ma_pall(stack_t **stack, unsigned int line_number);
-stack_t *ma_push(stack_t **stack, unsigned int line_number);
+void ma_push(stack_t **stack, unsigned int line_number);
 
 /*functions*/
 FILE *open_file(char *filename, char *mode);
 void free_stack(stack_t *stack);
 bool is_numeric(const char *str);
-void trim(char *str);
-void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number);
-
+char *trim(char *str);
+void do_it();
 
 #endif /* MONTY_H */

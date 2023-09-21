@@ -39,21 +39,17 @@ void free_stack(stack_t *stack)
  * @str: string
  * Return: void
  */
-void trim(char *str)
+char *trim(char *str)
 {
-	int start = 0, end = strlen(str) - 1;
-	int shift = 0, i;
-
-	while (isspace((unsigned char)str[start]))
-		start++;
-
-	while ((end >= start) && isspace((unsigned char)str[end]))
-		end--;
-	for (i = start; i <= end; i++)
-	{
-		str[i - shift] = str[i];
-	}
-	str[end - start + 1] = '\0';
+	while (*str)
+    {
+        if (*str == ' ' || *str == '\t' || *str == '\n'
+            || *str == '\v' || *str == '\f' || *str == '\r')
+            str++;
+        else
+            break;
+    }
+    return (str);
 }
 /**
  * is_numeric - checks if a string is a number
