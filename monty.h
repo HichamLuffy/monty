@@ -48,6 +48,7 @@ void ma_pint(stack_t **stack, unsigned int line_number);
 
 /*functions*/
 FILE *open_file(char *filename, char *mode);
+void call(stack_t **stack, const char *instruction, int line_number);
 void free_stack(stack_t *stack);
 int is_numeric(char *str);
 void trim(char *str);
