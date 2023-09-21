@@ -37,8 +37,7 @@ int main(int argc, char *argv[])
 			token = strtok(NULL, " \t\n");
 			if (!token || is_numeric(token) == 0)
 			{
-				free_stack(stack);
-				eor(3, line_number, ma_file);
+				eor(3, line_number, ma_file, stack);
 			}
 			ma_push(&stack, atoi(token));
 		} else if (strcmp(token, "pall") == 0)
@@ -73,9 +72,11 @@ void eor(int error_code, ...)
 		case 3:
 			fprintf(stderr, "L%d: usage: push integer\n", va_arg(ag, int));
 			fclose(va_arg(ag, FILE *));
+            free_stack(va_arg(ag, stack_t *));
 			exit(EXIT_FAILURE);
 		case 4:
-			fprintf(stderr, "L%d: unknown instruction %s\n", va_arg(ag, int), va_arg(ag, char *));
+			fprintf(stderr, "L%d: unknown instruction %s\n",
+					va_arg(ag, int), va_arg(ag, char *));
 			free_stack(va_arg(ag, stack_t *));
 			fclose(va_arg(ag, FILE *));
 			exit(EXIT_FAILURE);
