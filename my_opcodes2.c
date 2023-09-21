@@ -7,22 +7,13 @@
  */
 void ma_pop(stack_t **stack, unsigned int line_number)
 {
+    stack_t *tmp;
 
-	if (!*stack)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		free((*stack)->prev);
-		exit(EXIT_FAILURE);
-	}
-	if ((*stack)->next == NULL)
-	{
-		free(*stack);
-		*stack = NULL;
-	}
-	else
-	{
-		*stack = (*stack)->next;
-		free((*stack)->prev);
-		(*stack)->prev = NULL;
-	}
+    if (stack == NULL || *stack == NULL)
+        fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+    tmp = *stack;
+    *stack = tmp->next;
+    if (*stack)
+        (*stack)->prev = NULL;
+    free(tmp);
 }
