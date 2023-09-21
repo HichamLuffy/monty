@@ -37,8 +37,10 @@ int main (int argc, char *argv[])
             if (!token || !is_numeric(token))
             {
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                exit(EXIT_FAILURE);
                 continue;
             }
+
                 ma_push(&stack, atoi(token));
         }
         else if (strcmp(token, "pall") == 0)
