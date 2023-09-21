@@ -39,7 +39,6 @@ int main (int argc, char *argv[])
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 continue;
             }
-            else
                 ma_push(&stack, atoi(token));
         }
         else if (strcmp(token, "pall") == 0)
