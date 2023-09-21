@@ -3,7 +3,7 @@
 
 int main (int argc, char *argv[])
 {
-    char limit[LIMIT_STACK], *token;
+    char limit[LIMIT_STACK], *token, *line;
     FILE *ma_file;
     stack_t *stack = NULL;
     int line_number = 0;
@@ -21,14 +21,14 @@ int main (int argc, char *argv[])
     }
     while (fgets(limit, LIMIT_STACK, ma_file))
     {
-        trim(limit);
-        if (strlen(limit) < 3 || limit[0] == '#')
+        line = trim(limit);
+        if (strlen(line) < 3 || line[0] == '#')
         {
             line_number++;
             continue;
         }
         line_number++;
-        token = strtok(limit, " \t\n");
+        token = strtok(line, " \t\n");
         if (!token)
             continue;
         if (strcmp(token, "push") == 0)
@@ -36,7 +36,6 @@ int main (int argc, char *argv[])
             token = strtok(NULL, " \t\n");
             if (!token || is_numeric(token) == 0)
             {
-
                 free_stack(stack);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 exit(EXIT_FAILURE);
