@@ -91,20 +91,25 @@ void swap(stack_t **stack, unsigned int line_number)
 	aide->prev = NULL;
 	*stack = aide;
 }
-
+/**
+ * add - adds the top two elements of the stack
+ * @stack: pointer to the top of the stack
+ * @line_number: line number
+ * Return: void
+*/
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
 	if (*stack == NULL || (*stack)->next == NULL)
-    {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-        free_stack(*stack);
-        exit(EXIT_FAILURE);
-    }
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
 
-    (*stack)->next->n += (*stack)->n;
-    temp = *stack;
-    *stack = (*stack)->next;
-    free(temp);
+	(*stack)->next->n += (*stack)->n;
+	temp = *stack;
+	*stack = (*stack)->next;
+	free(temp);
 }
