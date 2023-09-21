@@ -68,5 +68,4 @@ void ma_pstr(stack_t **stack, int line_number)
 		putchar((char)ascii_value);
 		current = current->next;
 	}
-	putchar('\n');
 }
