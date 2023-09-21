@@ -17,13 +17,13 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		eor(1);
-        exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	ma_file = open_file(argv[1], "r");
 	if (!ma_file)
     {
 		eor(2, argv[1]);
-        exit
+        exit(EXIT_FAILURE);
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		if (strlen(limit) < 3 || limit[0] == '#')
