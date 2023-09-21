@@ -5,29 +5,28 @@
  * @line_number: line number
  * Return: void
  */
-stack_t *ma_push(stack_t **stack, unsigned int line_number)
+stack_t *ma_push(stack_t **stack, unsigned int n)
 {
-    stack_t *new = malloc(sizeof(stack_t));
+	stack_t *new;
 
-    (void) line_number;
+	new = malloc(sizeof(stack_t));
+	if (!new)
+	{
+		if (*stack != NULL)
+			free_stack(*stack);
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    if (!new)
-    {
-        if (*stack)
-            free_stack(*stack);
-        fprintf(stderr, "Error: malloc failed\n");
-        exit(EXIT_FAILURE);
-    }
-    new->n = line_number;
-    new->prev = NULL;
-    new->next = *stack;
-    if (*stack)
-    {
-        (*stack)->prev = new;
-    }
-    *stack = new;
+	new->n = n;
+	new->prev = NULL;
+	new->next = *stack;
 
-    return (*stack);
+	if (*stack)
+		(*stack)->prev = new;
+	*stack = new;
+
+	return (new);
 }
 
 /**

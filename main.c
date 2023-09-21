@@ -24,36 +24,35 @@ int main (int argc, char *argv[])
         trim(limit);
         if (strlen(limit) < 3 || limit[0] == '#')
         {
-            line_number++;
             continue;
         }
         line_number++;
         token = strtok(limit, " \t\n");
-        if (!token)
-            continue;
-        if (strcmp(token, "push") == 0)
+        while (token)
         {
-            token = strtok(NULL, " \t\n");
-            if (!token || !is_numeric(token))
+            if (strcmp(token, "push") == 0)
             {
-                fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                free_stack(stack);
+                token = strtok(NULL, " \t\n");
+                if (!token && !is_numeric(token))
+                {
+                    fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                    exit(EXIT_FAILURE);
+                }
+                    ma_push(&stack, atoi(token));
+            }
+            else if (strcmp(token, "pall") == 0)
+            {
+                ma_pall(&stack, line_number);
+            }
+            else
+            {
+                fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+                if (stack)
+                    free_stack(stack);
                 fclose(ma_file);
                 exit(EXIT_FAILURE);
             }
-                ma_push(&stack, atoi(token));
-        }
-        else if (strcmp(token, "pall") == 0)
-        {
-            ma_pall(&stack, line_number);
-        }
-        else
-        {
-            fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-            if (stack)
-                free_stack(stack);
-            fclose(ma_file);
-            exit(EXIT_FAILURE);
+            token = strtok(NULL, " \t\n");
         }
         
     }
