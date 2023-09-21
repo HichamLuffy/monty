@@ -62,7 +62,6 @@ void ma_pint(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		free_stack(*stack);
-		fclose(ma_file);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);

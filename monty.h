@@ -44,6 +44,7 @@ typedef struct instruction_s
 /*opcodes*/
 void ma_pall(stack_t **stack, unsigned int line_number);
 stack_t *ma_push(stack_t **stack, unsigned int n);
+void ma_pint(stack_t **stack, unsigned int line_number);
 
 /*functions*/
 FILE *open_file(char *filename, char *mode);
