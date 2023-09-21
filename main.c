@@ -20,13 +20,12 @@ int main (int argc, char *argv[])
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-	while (fgets(limit, sizeof(limit), buf.mafile) != NULL)
+	while (fgets(limit, LIMIT_STACK, buf.mafile) != NULL)
 	{
+        buf.num_lines++;
+        trim(limit);
         if (strlen(trim(limit)) < 3 || trim(limit)[0] == '#')
-        {
-            buf.num_lines++;
             continue;
-        }
 		buf.num_lines++;
         token = strtok(limit, " \n");
         buf.opcode = NULL;
