@@ -20,7 +20,7 @@ int main (int argc, char *argv[])
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-	while (fgets(limit, LIMIT_STACK, buf.mafile) != NULL)
+	while (fgets(limit, sizeof(limit), buf.mafile) != NULL)
 	{
         if (strlen(trim(limit)) < 3 || trim(limit)[0] == '#')
         {
@@ -28,9 +28,8 @@ int main (int argc, char *argv[])
             continue;
         }
 		buf.num_lines++;
-        token = strtok(limit, " \t\n");
+        token = strtok(limit, " \n");
         buf.opcode = NULL;
-        
 		for (i = 0; token != NULL && i < 2; i++)
         {
             if (i == 0)
@@ -39,17 +38,12 @@ int main (int argc, char *argv[])
                 break;
             if (i == 1)
             {
-                if (strcmp(token, "push") == 0)
+
+                if (!is_numeric(token))
                 {
-                    token = strtok(NULL, " \t\n");
-                    if (!token || !is_numeric(token))
-                    {
-                        fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
-                        free_stack(buf.first);
-                        exit(EXIT_FAILURE);
-                    }
-                    else
-                        ma_push(&buf.first, atoi(token));
+                    fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
+                    free_stack(buf.first);
+                    exit(EXIT_FAILURE);
                 }
                 buf.cmdtoken[i] = token;
             }
