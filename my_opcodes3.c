@@ -70,7 +70,7 @@ void ma_div(stack_t **stack, unsigned int line_number)
  * @line_number: line number
  * Return: void
  */
-void ma_mul(stack_t **stack, int line_number)
+void ma_mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
@@ -92,7 +92,7 @@ void ma_mul(stack_t **stack, int line_number)
  * @stack: pointer to the top of the stack
  * @line_number: line number
  */
-void ma_mod(stack_t **stack, int line_number)
+void ma_mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
