@@ -21,7 +21,7 @@ int main (int argc, char *argv[])
     }
     while (fgets(limit, LIMIT_STACK, ma_file))
     {
-        trim(limit);
+        
         if (strlen(limit) < 3 || limit[0] == '#')
         {
             line_number++;
@@ -36,7 +36,6 @@ int main (int argc, char *argv[])
             token = strtok(NULL, " \t\n");
             if (!token || is_numeric(token) == 0)
             {
-
                 free_stack(stack);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 fclose(ma_file);
