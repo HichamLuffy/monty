@@ -36,16 +36,17 @@ int main (int argc, char *argv[])
             token = strtok(NULL, " \t\n");
             if (!token || is_numeric(token) == 0)
             {
+
                 free_stack(stack);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 exit(EXIT_FAILURE);
             }
-            else
-                ma_push(&stack, atoi(token));
+            ma_push(&stack, atoi(token));
         }
         else if (strcmp(token, "pall") == 0)
         {
-            ma_pall(&stack, line_number);
+            if (stack)
+                ma_pall(&stack, line_number);
         }
         else
         {
