@@ -45,6 +45,13 @@ int main (int argc, char *argv[])
         {
             ma_pall(&stack, line_number);
         }
+        else
+        {
+            fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+            free_stack(stack);
+            fclose(ma_file);
+            exit(EXIT_FAILURE);
+        }
         
     }
 
