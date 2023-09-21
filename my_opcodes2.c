@@ -49,24 +49,24 @@ void ma_pchar(stack_t **stack, int line_number)
  * @stack: pointer to the top of the stack
  * @line_number: line number
  * Return: void
-*/
+ */
 void ma_pstr(stack_t **stack, int line_number)
 {
-    stack_t *current = *stack;
-    int ascii_value;
+	stack_t *current = *stack;
+	int ascii_value;
 
-    (void) line_number;
+	(void) line_number;
 
-    while (current != NULL)
-    {
-        ascii_value = current->n;
-        if (ascii_value < 32 || ascii_value > 126 || ascii_value == 0)
-        {
-            break;
-        }
+	while (current != NULL)
+	{
+		ascii_value = current->n;
+		if (ascii_value < 32 || ascii_value > 126 || ascii_value == 0)
+		{
+			break;
+		}
 
-        putchar((char)ascii_value);
-        current = current->next;
-    }
-    putchar('\n');
+		putchar((char)ascii_value);
+		current = current->next;
+	}
+	putchar('\n');
 }
