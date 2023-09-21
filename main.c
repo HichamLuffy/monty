@@ -10,7 +10,7 @@ int main (int argc, char *argv[])
 
     if (argc != 2)
     {
-        printf("USAGE: monty file\n");
+        perror("USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
     ma_file = open_file(argv[1], "r");
