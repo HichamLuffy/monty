@@ -51,6 +51,7 @@ int main (int argc, char *argv[])
                     else
                         ma_push(&buf.first, atoi(token));
                 }
+                buf.cmdtoken[i] = token;
             }
             token = strtok(NULL, " \n");
         }
