@@ -82,7 +82,6 @@ void eor(int error_code, ...)
 			exit(EXIT_FAILURE);
 		default:
 			exit(EXIT_SUCCESS);
-
 	}
 	exit(EXIT_FAILURE);
 }
