@@ -48,8 +48,7 @@ int main(int argc, char *argv[])
             ma_push(&stack, atoi(token));
         } else if (strcmp(token, "pall") == 0)
             ma_pall(&stack, line_number);
-         else
-        {
+         else {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
             free_stack(stack);
             fclose(ma_file);
