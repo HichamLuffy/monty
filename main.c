@@ -50,9 +50,6 @@ int main (int argc, char *argv[])
         else
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-            if (stack)
-                free_stack(stack);
-            fclose(ma_file);
             exit(EXIT_FAILURE);
         }
         
