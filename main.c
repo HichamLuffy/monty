@@ -55,7 +55,6 @@ int main (int argc, char *argv[])
                 fclose(ma_file);
                 exit(EXIT_FAILURE);
             }
-            token = strtok(NULL, " \t\n");
         }
         
     }
