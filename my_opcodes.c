@@ -87,7 +87,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	aide = (*stack)->next;
 	(*stack)->next = aide->next;
 	(*stack)->prev = aide;
-    aide->next = *stack;
-    aide->prev = NULL;
-    *stack = aide;
+	aide->next = *stack;
+	aide->prev = NULL;
+	*stack = aide;
 }
