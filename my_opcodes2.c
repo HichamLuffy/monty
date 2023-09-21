@@ -27,7 +27,6 @@ void ma_pop(stack_t **stack, unsigned int line_number)
  */
 void ma_pchar(stack_t **stack, int line_number)
 {
-	int ascii_value;
 
 	if (*stack == NULL)
 	{
@@ -36,15 +35,12 @@ void ma_pchar(stack_t **stack, int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	ascii_value = (*stack)->n;
-
-	if (ascii_value < 0 || ascii_value > 127)
+	if ((*stack)->n > 127 || (*stack)->n < 0)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 
-	putchar((char)ascii_value);
-	putchar('\n');
+	printf("%c\n", (*stack)->n);
 }
