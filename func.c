@@ -42,7 +42,8 @@ void free_stack(stack_t *stack)
 char *trim(char *str)
 {
     int start = 0, end = strlen(str) - 1;
-    int shift = 0, i;
+    int i;
+	char *trimmed_str;
 
     while (isspace((unsigned char)str[start]))
         start++;
@@ -50,7 +51,7 @@ char *trim(char *str)
     while ((end >= start) && isspace((unsigned char)str[end]))
         end--;
 
-    char *trimmed_str = (char *)malloc((end - start + 2) * sizeof(char));
+    trimmed_str = (char *)malloc((end - start + 2) * sizeof(char));
     if (trimmed_str == NULL)
     {
         fprintf(stderr, "Error: Memory allocation failed in trim function\n");
