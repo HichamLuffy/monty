@@ -36,8 +36,7 @@ int main (int argc, char *argv[])
                 if (!token || !is_numeric(token))
                 {
                     fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                    if (stack)
-                        free_stack(stack);
+                    free_stack(stack);
                     fclose(ma_file);
                     exit(EXIT_FAILURE);
                 }
