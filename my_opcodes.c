@@ -96,7 +96,7 @@ void swap(stack_t **stack, unsigned int line_number)
  * @stack: pointer to the top of the stack
  * @line_number: line number
  * Return: void
-*/
+ */
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
