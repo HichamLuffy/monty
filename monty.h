@@ -50,6 +50,7 @@ FILE *open_file(char *filename, char *mode);
 void free_stack(stack_t *stack);
 int is_numeric(char *str);
 void trim(char *str);
+void eor(int error_code, ...);
 
 
 #endif /* MONTY_H */
