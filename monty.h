@@ -50,10 +50,10 @@ void add(stack_t **stack, unsigned int line_number);
 void ma_nop(stack_t **stack, unsigned int line_number);
 void ma_sub(stack_t **stack, unsigned int line_number);
 void ma_div(stack_t **stack, unsigned int line_number);
-void ma_mul(stack_t **stack, unsigned int line_number);
-void ma_mod(stack_t **stack, unsigned int line_number);
-void ma_pchar(stack_t **stack, unsigned int line_number);
-void ma_pstr(stack_t **stack, unsigned int line_number);
+void ma_mul(stack_t **stack, int line_number);
+void ma_mod(stack_t **stack, int line_number);
+void ma_pchar(stack_t **stack, int line_number);
+void ma_pstr(stack_t **stack, int line_number);
 void ma_rotl(stack_t **stack, unsigned int line_number);
 
 /*functions*/

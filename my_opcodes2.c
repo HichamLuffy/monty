@@ -27,7 +27,7 @@ void ma_pop(stack_t **stack, unsigned int line_number)
  * @line_number: line number
  * Return: void
  */
-void ma_pchar(stack_t **stack, unsigned int line_number)
+void ma_pchar(stack_t **stack, int line_number)
 {
 
 	if (*stack == NULL)
@@ -53,7 +53,7 @@ void ma_pchar(stack_t **stack, unsigned int line_number)
  * @line_number: line number
  * Return: void
  */
-void ma_pstr(stack_t **stack, unsigned int line_number)
+void ma_pstr(stack_t **stack, int line_number)
 {
 	stack_t *current = *stack;
 	int ascii_value;
