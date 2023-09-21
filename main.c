@@ -1,31 +1,32 @@
 #include "monty.h"
-
+bfstruct buf;
 
 int main (int argc, char *argv[])
 {
     char limit[LIMIT_STACK], *token;
-    FILE *ma_file;
-    stack_t *stack = NULL;
-    int line_number = 0;
 
     if (argc != 2)
     {
-        printf("Usage: monty file\n");
+        fprintf(stderr, "Usage: monty file\n");
         exit(EXIT_FAILURE);
     }
-    ma_file = open_file(argv[1], "r");
-    if (!ma_file)
+    
+    buf.argv = argv;
+    
+    buf.mafile = open_file(buf.argv[1], "r");
+    if (!buf.mafile)
     {
-        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        fprintf(stderr, "Error: Can't open file %s\n", buf.argv[1]);
         exit(EXIT_FAILURE);
     }
-    while (fgets(limit, LIMIT_STACK, ma_file))
+    
+    while (fgets(limit, LIMIT_STACK, buf.mafile))
     {
-        line_number++;
+        buf.num_lines++;
         trim(limit);
         if (strlen(limit) < 3 || limit[0] == '#')
         {
-            fprintf(stderr, "L%d: ignoring empty line\n", line_number);
+            fprintf(stderr, "L%d: ignoring empty line\n", buf.num_lines);
             continue;
         }
         token = strtok(limit, " \t\n");
@@ -36,32 +37,30 @@ int main (int argc, char *argv[])
             token = strtok(NULL, " \t\n");
             if (!token || !is_numeric(token))
             {
-
-                fprintf(stderr, "L%d: not integer\n", line_number);
-                free_stack(stack);
-                fclose(ma_file);
-                fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                fprintf(stderr, "L%d: not integer\n", buf.num_lines);
+                free_stack(buf.first);
+                fclose(buf.mafile);
+                fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
                 exit(EXIT_FAILURE);
             }
             else
-                ma_push(&stack, atoi(token));
+                ma_push(&buf.first, atoi(token));
         }
         else if (strcmp(token, "pall") == 0)
         {
-            ma_pall(&stack, line_number);
+            ma_pall(&buf.first, buf.num_lines);
         }
         else
         {
-            fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-            if (stack)
-                free_stack(stack);
-            fclose(ma_file);
+            fprintf(stderr, "L%d: unknown instruction %s\n", buf.num_lines, token);
+            if (buf.first)
+                free_stack(buf.first);
+            fclose(buf.mafile);
             exit(EXIT_FAILURE);
         }
-        
     }
 
-    free_stack(stack);
-    fclose(ma_file);
+    free_stack(buf.first);
+    fclose(buf.mafile);
     return (EXIT_SUCCESS);
 }

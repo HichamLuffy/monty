@@ -53,10 +53,10 @@ typedef struct bfstruct
         int md;
         FILE *mafile;
         unsigned int num_lines;
-	char *cmdlist[100];
-	char *cmdtoken[100];
+		char *cmdlist[100];
+		char *cmdtoken[100];
         char *opcode;
-	char **argv;
+		char **argv;
         stack_t *first;
 
 } bfstruct;
