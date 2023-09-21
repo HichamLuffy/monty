@@ -28,8 +28,9 @@ int main (int argc, char *argv[])
             continue;
         }
 		buf.num_lines++;
-        token = strtok(limit, " \n");
+        token = strtok(limit, " \t\n");
         buf.opcode = NULL;
+        
 		for (i = 0; token != NULL && i < 2; i++)
         {
             if (i == 0)
@@ -38,14 +39,18 @@ int main (int argc, char *argv[])
                 break;
             if (i == 1)
             {
-
-                if (!is_numeric(token))
+                if (strcmp(token, "push") == 0)
                 {
-                    fprintf(stderr, "L%d: usage: push integer\n", buf.num_lines);
-                    free_stack(buf.first);
-                    exit(EXIT_FAILURE);
+                    token = strtok(NULL, " \t\n");
+                    if (!token || !is_numeric(token))
+                    {
+                        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                        free_stack(buf.first);
+                        exit(EXIT_FAILURE);
+                    }
+                    else
+                        ma_push(&buf.first, atoi(token));
                 }
-                buf.cmdtoken[i] = token;
             }
             token = strtok(NULL, " \n");
         }
