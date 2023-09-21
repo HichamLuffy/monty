@@ -91,3 +91,20 @@ void swap(stack_t **stack, unsigned int line_number)
 	aide->prev = NULL;
 	*stack = aide;
 }
+
+void add(stack_t **stack, unsigned int line_number)
+{
+	int v;
+
+	if (!*stack || !((*stack)->next))
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+	v = (*stack)->n;
+	(*stack)->n += (*stack)->next->n;
+	(*stack)->next->n = v;
+	free_stack(*stack);
+	*stack = (*stack)->next;
+}
