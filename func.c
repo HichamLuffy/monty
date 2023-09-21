@@ -3,6 +3,7 @@
 /**
  * open_file - opens a file
  * @filename: name of the file
+ * @mode: mode
  * Return: pointer to the file
  */
 FILE *open_file(char *filename, char *mode)

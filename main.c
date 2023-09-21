@@ -26,7 +26,6 @@ int main (int argc, char *argv[])
 	}
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
-
 		if (strlen(limit) < 3 || limit[0] == '#')
 		{
 			line_number++;
@@ -47,13 +46,11 @@ int main (int argc, char *argv[])
 				exit(EXIT_FAILURE);
 			}
 			ma_push(&stack, atoi(token));
-		}
-		else if (strcmp(token, "pall") == 0)
+		} else if (strcmp(token, "pall") == 0)
 		{
 			if (stack)
 				ma_pall(&stack, line_number);
-		}
-		else
+		} else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 			if (stack)
@@ -61,9 +58,7 @@ int main (int argc, char *argv[])
 			fclose(ma_file);
 			exit(EXIT_FAILURE);
 		}
-
 	}
-
 	free_stack(stack);
 	fclose(ma_file);
 	return (EXIT_SUCCESS);
