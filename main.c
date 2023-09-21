@@ -19,11 +19,6 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	ma_file = open_file(argv[1], "r");
-	if (!ma_file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		if (strlen(limit) < 3 || limit[0] == '#')
@@ -46,8 +41,7 @@ int main(int argc, char *argv[])
 				exit(EXIT_FAILURE);
 			}
 			ma_push(&stack, atoi(token));
-		}
-		else
+		} else
 			call(&stack, token, line_number);
 	}
 	free_stack(stack);
@@ -70,7 +64,7 @@ void call(stack_t **stack, const char *instruction, int line_number)
 	else if (strcmp(instruction, "pop") == 0)
 		ma_pop(stack, line_number);
 	else if (strcmp(instruction, "pint") == 0)
-          ma_pint(stack, line_number);
+		ma_pint(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);

@@ -11,18 +11,18 @@ void ma_pop(stack_t **stack, unsigned int line_number)
 	if (!*stack)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		free(*stack);
-        exit(EXIT_FAILURE);
+		free(stack);
+		exit(EXIT_FAILURE);
 	}
-    if ((*stack)->next)
-    {
-        free(*stack);
-        *stack = NULL;
-    }
+	if ((*stack)->next == NULL)
+	{
+		free(*stack);
+		*stack = NULL;
+	}
 	else
 	{
 		*stack = (*stack)->next;
-        free((*stack)->prev);
-        (*stack)->prev = NULL;
+		free((*stack)->prev);
+		(*stack)->prev = NULL;
 	}
 }
