@@ -45,6 +45,6 @@ void ma_pchar(stack_t **stack, int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	putchar(ascii_value);
+	putchar((char)ascii_value);
 	putchar('\n');
 }
