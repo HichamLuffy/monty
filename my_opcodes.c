@@ -66,3 +66,27 @@ void ma_pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", (*stack)->n);
 }
+
+/**
+ * swap - prints the value at the top of the stack, followed by a new line.
+ * @stack: pointer to the top of the stack
+ * @line_number: line number
+ * Return: void
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *aide;
+
+	if (!*stack || !((*stack)->next))
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+	aide = (*stack)->next;
+	(*stack)->next = aide->next;
+	(*stack)->prev = aide;
+    aide->next = *stack;
+    aide->prev = NULL;
+    *stack = aide;
+}
