@@ -1,4 +1,5 @@
-push 66
-push 66 test
+push 1
+push 2
 pall
-Push test
+push a
+pall

@@ -37,7 +37,8 @@ int main (int argc, char *argv[])
             if (!token || !is_numeric(token))
             {
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
-                free_stack(stack);
+                if (stack)
+                    free_stack(stack);
                 fclose(ma_file);
                 exit(EXIT_FAILURE);
             }
@@ -51,7 +52,8 @@ int main (int argc, char *argv[])
         else
         {
             fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-            free_stack(stack);
+            if (stack)
+                free_stack(stack);
             fclose(ma_file);
             exit(EXIT_FAILURE);
         }
