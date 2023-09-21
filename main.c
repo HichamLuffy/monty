@@ -75,6 +75,8 @@ void call(stack_t **stack, const char *instruction, int line_number)
 		ma_sub(stack, line_number);
 	else if (strcmp(instruction, "div") == 0)
 		ma_div(stack, line_number);
+	else if (strcmp(instruction, "mul") == 0)
+		ma_mul(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);

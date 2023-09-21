@@ -64,3 +64,26 @@ void ma_div(stack_t **stack, unsigned int line_number)
     *stack = (*stack)->next;
     free(temp);
 }
+/**
+ * ma_mul - multiplies the top element of the stack by the second top element of the stack
+ * @stack: pointer to the top of the stack
+ * @line_number: line number
+ * Return: void
+ * */
+void ma_mul(stack_t **stack, int line_number)
+{
+    stack_t *temp;
+
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+        free_stack(*stack);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n *= (*stack)->n;
+
+    temp = *stack;
+    *stack = (*stack)->next;
+    free(temp);
+}
