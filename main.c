@@ -79,6 +79,8 @@ void call(stack_t **stack, const char *instruction, int line_number)
 		ma_mul(stack, line_number);
 	else if (strcmp(instruction, "mod") == 0)
 		ma_mod(stack, line_number);
+	else if (strcmp(instruction, "pchar") == 0)
+		ma_pchar(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);
