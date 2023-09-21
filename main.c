@@ -6,7 +6,7 @@ int main (int argc, char *argv[])
     char limit[LIMIT_STACK], *token;
     FILE *ma_file;
     stack_t *stack = NULL;
-    int line_number = 0;
+    int line_number = 1;
 
     if (argc != 2)
     {
