@@ -23,8 +23,7 @@ int main(int argc, char *argv[])
 	if (!ma_file)
     {
 		eor(2, argv[1]);
-        exit(EXIT_FAILURE);
-    }
+        exit
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
 		if (strlen(limit) < 3 || limit[0] == '#')
