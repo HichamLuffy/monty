@@ -1,6 +1,11 @@
 #include "monty.h"
 
-
+/**
+ * main - check the code
+ * @argc: parameter
+ * @argv: parameter
+ * Return: 0
+*/
 int main (int argc, char *argv[])
 {
 	char limit[LIMIT_STACK], *token;
