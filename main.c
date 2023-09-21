@@ -36,11 +36,14 @@ int main (int argc, char *argv[])
             token = strtok(NULL, " \t\n");
             if (!token || !is_numeric(token))
             {
+
+                fprintf(stderr, "L%d: not integer\n", line_number);
                 free_stack(stack);
                 fclose(ma_file);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 exit(EXIT_FAILURE);
             }
+            else
                 ma_push(&stack, atoi(token));
         }
         else if (strcmp(token, "pall") == 0)
