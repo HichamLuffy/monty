@@ -7,15 +7,15 @@
  */
 FILE *open_file(char *filename, char *mode)
 {
-    FILE *ma_file;
+	FILE *ma_file;
 
-    ma_file = fopen(filename, mode);
-    if (ma_file == NULL)
-    {
-        fprintf(stderr, "Error: Can't open file %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
-    return (ma_file);
+	ma_file = fopen(filename, mode);
+	if (ma_file == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
+	return (ma_file);
 
 }
 /**
@@ -25,14 +25,14 @@ FILE *open_file(char *filename, char *mode)
  */
 void free_stack(stack_t *stack)
 {
-    stack_t *current;
+	stack_t *current;
 
-    while (stack != NULL)
-    {
-        current = stack;
-        stack = stack->next;
-        free(current);
-    }
+	while (stack != NULL)
+	{
+		current = stack;
+		stack = stack->next;
+		free(current);
+	}
 }
 /**
  * trim - removes whitespace from the beginning and end of a string
@@ -41,19 +41,19 @@ void free_stack(stack_t *stack)
  */
 void trim(char *str)
 {
-    int start = 0, end = strlen(str) - 1;
-    int shift = 0, i;
+	int start = 0, end = strlen(str) - 1;
+	int shift = 0, i;
 
-    while (isspace((unsigned char)str[start]))
-        start++;
+	while (isspace((unsigned char)str[start]))
+		start++;
 
-    while ((end >= start) && isspace((unsigned char)str[end]))
-        end--;
-    for (i = start; i <= end; i++)
-    {
-        str[i - shift] = str[i];
-    }
-    str[end - start + 1] = '\0';
+	while ((end >= start) && isspace((unsigned char)str[end]))
+		end--;
+	for (i = start; i <= end; i++)
+	{
+		str[i - shift] = str[i];
+	}
+	str[end - start + 1] = '\0';
 }
 /**
  * is_numeric - checks if a string is a number

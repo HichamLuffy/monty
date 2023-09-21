@@ -50,14 +50,14 @@ typedef struct instruction_s
  */
 typedef struct bfstruct
 {
-        int md;
-        FILE *mafile;
-        unsigned int num_lines;
-		char *cmdlist[100];
-		char *cmdtoken[100];
-        char *opcode;
-		char **argv;
-        stack_t *first;
+	int md;
+	FILE *mafile;
+	unsigned int num_lines;
+	char *cmdlist[100];
+	char *cmdtoken[100];
+	char *opcode;
+	char **argv;
+	stack_t *first;
 
 } bfstruct;
 extern bfstruct buf;
