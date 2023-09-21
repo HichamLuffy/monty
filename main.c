@@ -39,6 +39,7 @@ int main (int argc, char *argv[])
 
                 free_stack(stack);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                fclose(ma_file);
                 exit(EXIT_FAILURE);
             }
             ma_push(&stack, atoi(token));
