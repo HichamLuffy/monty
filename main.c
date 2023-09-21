@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
 	ma_file = open_file(argv[1], "r");
 	while (fgets(limit, LIMIT_STACK, ma_file))
 	{
+		if (limit[0] == '#')
+            continue;
 		if (strlen(limit) < 3 || limit[0] == '#')
 		{
 			line_number++;
