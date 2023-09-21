@@ -47,14 +47,11 @@ int main(int argc, char *argv[])
 			}
 			ma_push(&stack, atoi(token));
 		} else if (strcmp(token, "pall") == 0)
-		{
-			if (stack)
-				ma_pall(&stack, line_number);
-		} else
+			ma_pall(&stack, line_number);
+         else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-			if (stack)
-				free_stack(stack);
+			free_stack(stack);
 			fclose(ma_file);
 			exit(EXIT_FAILURE);
 		}
