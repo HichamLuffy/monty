@@ -21,11 +21,12 @@ int main (int argc, char *argv[])
     }
     while (fgets(limit, LIMIT_STACK, ma_file))
     {
-        line_number++;
         trim(limit);
         if (strlen(limit) == 0 || limit[0] == '#')
+        {
+            line_number++;
             continue;
-
+        }
         token = strtok(limit, " \t\n");
 
         if (strcmp(token, "push") == 0)
