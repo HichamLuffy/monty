@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
  * @instruction: instruction
  * @line_number: line number
  * Return: void
-*/
+ */
 
 void call(stack_t **stack, const char *instruction, int line_number)
 {
