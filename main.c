@@ -75,8 +75,7 @@ void eor(int error_code, ...)
 			fclose(va_arg(ag, FILE *));
 			exit(EXIT_FAILURE);
 		case 4:
-			fprintf(stderr, "L%d: unknown instruction %s\n",
-					va_arg(ag, int), va_arg(ag, char *));
+			fprintf(stderr, "L%d: unknown instruction %s\n", va_arg(ag, int), va_arg(ag, char *));
 			free_stack(va_arg(ag, stack_t *));
 			fclose(va_arg(ag, FILE *));
 			exit(EXIT_FAILURE);
