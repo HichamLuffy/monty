@@ -87,3 +87,32 @@ void ma_mul(stack_t **stack, int line_number)
 	*stack = (*stack)->next;
 	free(temp);
 }
+/**
+ * ma_mod - check the code
+ * @stack: pointer to the top of the stack
+ * @line_number: line number
+ */
+void ma_mod(stack_t **stack, int line_number)
+{
+	stack_t *temp;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n %= (*stack)->n;
+
+	temp = *stack;
+	*stack = (*stack)->next;
+	free(temp);
+}
