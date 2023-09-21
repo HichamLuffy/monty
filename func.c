@@ -60,21 +60,21 @@ void trim(char *str)
  * @str: string
  * Return: 1 if string is a number, 0 otherwise
  */
-bool is_numeric(const char *str)
+int is_numeric(char *str)
 {
-    int i = 0;
+	int i = 0;
 
-    if (str == NULL || *str == '\0')
-        return (false);
+	if (str == NULL)
+		return (0);
 
-    if (str[i] == '-')
-        i++;
-    while (str[i] != '\0')
-    {
-        if (!isdigit((unsigned char)str[i]))
-            return (false);
-        i++;
-    }
+	if (str[i] == '-' || str[i] == '+')
+		i++; /* Skip the optional sign */
 
-    return (true);
+	while (str[i] != '\0')
+	{
+		if (!isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -68,7 +68,7 @@ stack_t *ma_push(stack_t **stack, unsigned int n);
 /*functions*/
 FILE *open_file(char *filename, char *mode);
 void free_stack(stack_t *stack);
-bool is_numeric(const char *str);
+int is_numeric(char *str);
 void trim(char *str);
 void do_it();
 

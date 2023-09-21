@@ -34,10 +34,9 @@ int main (int argc, char *argv[])
         if (strcmp(token, "push") == 0)
         {
             token = strtok(NULL, " \t\n");
-            if (!token || !is_numeric(token))
+            if (!token || is_numeric(token) == 0)
             {
                 free_stack(stack);
-                fclose(ma_file);
                 fprintf(stderr, "L%d: usage: push integer\n", line_number);
                 exit(EXIT_FAILURE);
             }
@@ -56,10 +55,39 @@ int main (int argc, char *argv[])
             fclose(ma_file);
             exit(EXIT_FAILURE);
         }
+        line_number++;
         
     }
 
     free_stack(stack);
     fclose(ma_file);
     return (EXIT_SUCCESS);
+}
+
+/**
+ * get_op_func - Retrieves the corresponding function pointer
+ *  based on the opcode.
+ * @s: The opcode string.
+ *a
+ * Return: Pointer to the corresponding function, or NULL if opcode not found.
+ */
+
+void (*get_op_func(char *s))(stack_t **stack, unsigned int line_number)
+{
+	instruction_t opf[] = {
+		{"pall", ma_pall},
+		{NULL, NULL}
+	};
+
+	int i = 0;
+
+	while (opf[i].opcode)
+	{
+		if (strncmp(s, opf[i].opcode, (strlen(s))) == 0)
+		{
+			return (opf[i].f);
+		}
+		i++;
+	}
+	return (NULL);
 }
