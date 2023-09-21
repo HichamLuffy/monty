@@ -24,10 +24,9 @@ void ma_pop(stack_t **stack, unsigned int line_number)
  * @stack: pointer to the top of the stack
  * @line_number: line number
  * Return: void
-*/
+ */
 void ma_pchar(stack_t **stack, int line_number)
 {
-	stack_t *temp;
 	int ascii_value;
 
 	if (*stack == NULL)
@@ -48,8 +47,4 @@ void ma_pchar(stack_t **stack, int line_number)
 
 	putchar(ascii_value);
 	putchar('\n');
-
-	temp = *stack;
-	*stack = (*stack)->next;
-	free(temp);
 }
