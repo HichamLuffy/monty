@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
  * @error_code: parameter
  * @...: parameter
  * Return: void
-*/
+ */
 void eor(int error_code, ...)
 {
 	va_list ag;
@@ -72,7 +72,7 @@ void eor(int error_code, ...)
 		case 3:
 			fprintf(stderr, "L%d: usage: push integer\n", va_arg(ag, int));
 			fclose(va_arg(ag, FILE *));
-            free_stack(va_arg(ag, stack_t *));
+			free_stack(va_arg(ag, stack_t *));
 			exit(EXIT_FAILURE);
 		case 4:
 			fprintf(stderr, "L%d: unknown instruction %s\n",
