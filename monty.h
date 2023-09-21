@@ -40,27 +40,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct buf_struct - Global buffers.
- * @cmdlist: Tokenized read buffer.
- * @cmdtoken: Tokenize each token from previous split based on spaces.
- * @argv: Arguments from command line.
- *
- * Description: - Buffers used globally throughout files.
- */
-typedef struct bfstruct
-{
-	int md;
-	FILE *mafile;
-	unsigned int num_lines;
-	char *cmdlist[100];
-	char *cmdtoken[100];
-	char *opcode;
-	char **argv;
-	stack_t *first;
 
-} bfstruct;
-extern bfstruct buf;
 /*opcodes*/
 void ma_pall(stack_t **stack, unsigned int line_number);
 stack_t *ma_push(stack_t **stack, unsigned int n);
@@ -70,7 +50,6 @@ FILE *open_file(char *filename, char *mode);
 void free_stack(stack_t *stack);
 int is_numeric(char *str);
 void trim(char *str);
-void do_it();
 
 
 #endif /* MONTY_H */
