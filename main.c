@@ -33,7 +33,7 @@ int main (int argc, char *argv[])
             if (strcmp(token, "push") == 0)
             {
                 token = strtok(NULL, " \t\n");
-                if (!token && !is_numeric(token))
+                if (!token || !is_numeric(token))
                 {
                     fprintf(stderr, "L%d: usage: push integer\n", line_number);
                     exit(EXIT_FAILURE);
