@@ -26,6 +26,7 @@ int main (int argc, char *argv[])
         if (strlen(limit) < 3 || limit[0] == '#')
         {
             fprintf(stderr, "L%d: ignoring empty line\n", line_number);
+            line_number++;
             continue;
         }
         token = strtok(limit, " \t\n");
