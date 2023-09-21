@@ -81,7 +81,7 @@ void eor(int error_code, ...)
 			fclose(va_arg(ag, FILE *));
 			exit(EXIT_FAILURE);
 		default:
-			break;
+			exit(EXIT_SUCCESS);
 
 	}
 	exit(EXIT_FAILURE);
