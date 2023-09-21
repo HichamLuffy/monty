@@ -71,6 +71,8 @@ void call(stack_t **stack, const char *instruction, int line_number)
 		add(stack, line_number);
 	else if (strcmp(instruction, "nop") == 0)
 		ma_nop(stack, line_number);
+	else if (strcmp(instruction, "sub") == 0)
+		ma_sub(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);

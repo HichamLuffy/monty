@@ -48,6 +48,7 @@ void ma_pint(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void ma_nop(stack_t **stack, unsigned int line_number);
+void ma_sub(stack_t **stack, unsigned int line_number);
 /*functions*/
 FILE *open_file(char *filename, char *mode);
 void call(stack_t **stack, const char *instruction, int line_number);
