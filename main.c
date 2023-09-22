@@ -87,6 +87,8 @@ void call(stack_t **stack, const char *instruction, int line_number)
 		;
 	else if (strcmp(instruction, "rotl") == 0)
 		ma_rotl(stack, line_number);
+	else if (strcmp(instruction, "rotr") == 0)
+		ma_rotr(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, instruction);
