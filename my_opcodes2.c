@@ -75,25 +75,25 @@ void ma_pstr(stack_t **stack, int line_number)
 }
 
 /**
- * ma_rot1 - rotates the stack to the top.
+ * ma_rotl - rotates the stack to the top.
  * @stack: pointer to the top of the stack
  * @line_number: line number
  * Return: void
  */
 void ma_rotl(stack_t **stack, unsigned int line_number)
 {
-    stack_t *last, *current;
+	stack_t *last, *current;
 	(void)line_number;
 
-    if (*stack == NULL || (*stack)->next == NULL)
-        return;
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
 
-    current = *stack;
-    while (current->next->next != NULL)
-        current = current->next;
+	current = *stack;
+	while (current->next->next != NULL)
+		current = current->next;
 
-    last = current->next;
-    current->next = NULL;
-    last->next = *stack;
-    *stack = last;
+	last = current->next;
+	current->next = NULL;
+	last->next = *stack;
+	*stack = last;
 }
